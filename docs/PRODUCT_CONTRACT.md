@@ -1,7 +1,6 @@
 # Product contract
 
-Status: proposal (Milestone 1). Claims marked **open** need instructor or
-reviewer confirmation before Milestone 2 begins.
+Status: proposal (Milestone 1), in review.
 
 ## Users and decisions
 
@@ -36,7 +35,7 @@ One dataset; all three tasks come from it. Details are in
 | Property | Value |
 | --- | --- |
 | Source | Ames Housing (De Cock, 2011, *Journal of Statistics Education* 19(3)), built from Ames, Iowa Assessor's Office records |
-| License | No explicit license in the published documentation; distributed by JSE for teaching. **Open:** confirm acceptable use with instructor |
+| License | No explicit license in the published documentation; distributed by JSE for teaching; raw file not redistributed |
 | Observational unit | One residential property sale |
 | Sampling process | All recorded residential sales in Ames, IA, 2006–July 2010 (2,930 sales) |
 | Modeling population | Normal sales of residential-zoned properties with at most 4,000 sq ft above-ground living area (2,396 sales); exclusions justified in the dataset card |
@@ -56,8 +55,8 @@ attributes with the upgraded feature changed.
 neighborhood (positive event: "neighborhood premium"). The neighborhood medians
 are computed from training rows only. This asks which non-location attributes
 (quality, size, age, condition) move a home into the upper half of its own
-market, which is the question a renovation decision depends on. **Open:**
-reviewer to confirm this target is preferred over a fixed price threshold.
+market, which is the question a renovation decision depends on. A fixed
+price threshold was considered and rejected (see ADR 0001).
 
 **Unsupervised.** Do Ames homes form stable segments (for example, older modest
 homes, newer large homes, renovated older homes), and is the estimated value of

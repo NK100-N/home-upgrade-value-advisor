@@ -52,8 +52,8 @@ Full contract: [`../PRODUCT_CONTRACT.md`](../PRODUCT_CONTRACT.md).
   leakage and multi-source joins (air quality, flood risk) or a small simulated
   dataset (energy, 768 rows) add risk without serving the renovation question.
 - **Fixed price threshold for classification** (for example, above $200,000).
-  Rejected for now: it mostly measures location and size. Neighborhood premium
-  isolates the attributes a renovation can change. Open to reviewer input.
+  Rejected: it mostly measures location and size. Neighborhood premium
+  isolates the attributes a renovation can change.
 
 ## Consequences
 
@@ -62,14 +62,13 @@ Full contract: [`../PRODUCT_CONTRACT.md`](../PRODUCT_CONTRACT.md).
   - every course family applies without forcing;
   - the comparable-home retrieval gives users inspectable evidence.
 - **Costs and risks:**
-  - The license is unconfirmed, so the raw file stays local and CI uses a
-    constructed fixture.
+  - The dataset's redistribution terms are unstated, so the raw file stays
+    local and CI uses a constructed fixture.
   - The upgrade estimates are associations, not causal effects.
   - Results describe Ames from 2006 to 2010 only.
   - Ames is a widely used teaching dataset, so originality must come from the
     decision framing and the depth of evidence.
 - **Revisit if:**
-  - the instructor rejects the dataset or its license;
   - the 2010 test set proves too small for stable conclusions;
   - the neighborhood-premium target proves degenerate in some neighborhoods.
     Several have few sales, so the medians may be unstable.

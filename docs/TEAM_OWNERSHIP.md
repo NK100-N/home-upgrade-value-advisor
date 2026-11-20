@@ -2,8 +2,8 @@
 
 ## Participants
 
-- @NK100-N (solo project; **open:** confirm the solo arrangement and how
-  pull-request review is assigned with the instructor)
+- @NK100-N (solo project; the instructor is invited as a repository
+  collaborator for pull-request review)
 
 ## Shared core
 

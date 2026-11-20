@@ -12,8 +12,9 @@
   2026-11-16.
 - **License or access agreement:** the published documentation states no
   explicit license. The file is distributed by the *Journal of Statistics
-  Education* for teaching use. **Open:** confirm with the instructor. Until
-  confirmed, the raw file is not redistributed in this repository.
+  Education* for teaching use. Redistribution terms are unstated, so the raw
+  file is not committed: the download script retrieves it and CI uses
+  a constructed fixture.
 - **Immutable version and checksums (SHA-256):**
   - `AmesHousing.txt`:
     `6cfe6cb525ba437de428653a1040e2aed7d696640bf75203786a6d7a0e67cfcc`
