@@ -2,24 +2,42 @@
 
 ## Participants
 
-List GitHub handles only. Do not include student IDs, grades, accommodations,
-or private feedback.
+- @NK100-N (solo project; the instructor is invited as a repository
+  collaborator for pull-request review)
 
 ## Shared core
 
-Describe decisions, reviews, and integration work owned jointly by the team.
+As a solo project, @NK100-N owns the shared core:
+
+- product contract and dataset card;
+- data boundary;
+- experiment pipeline;
+- model selection and promotion;
+- API, interface, and deployment;
+- operations.
+
+Pull requests go through branch protection and CI. Independent review is
+requested as the course specifies.
 
 ## Individual vertical slices
 
-For each participant, record the user or scientific need, owned interfaces,
-tests, documentation, operations, related issues and pull requests, and
-dependencies on teammates.
+**@NK100-N: renovation value estimation and comparable-home evidence.**
+
+- **User need:** a homeowner comparing renovation options for their own house.
+- **Owned interfaces:**
+  - Ames data adapter and filters;
+  - student implementations under `src/dsm_project/algorithms/student/`;
+  - upgrade-difference estimator;
+  - comparable-home retrieval;
+  - prediction API and web form.
+- **Tests, documentation, and operations:** recorded per pull request.
 
 ## Integration and conflict history
 
-Summarize at least one consequential integration decision. Explain competing
-intentions, evidence used, and the resulting contract.
+To be recorded as decisions arise. The first candidate is the choice of
+classification target (neighborhood premium vs. a fixed price threshold); see
+[`decisions/0001-project-scope.md`](decisions/0001-project-scope.md).
 
 ## Maintenance responsibility
 
-State who investigates defects in each component through final review.
+@NK100-N investigates defects in every component through final review.
