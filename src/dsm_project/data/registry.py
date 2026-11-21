@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dsm_project.config import ProjectConfig
 from dsm_project.contracts import DatasetAdapter, ProjectDataset
+from dsm_project.data.ames import AmesHousingAdapter
 from dsm_project.data.csv_adapter import CSVProjectAdapter
 from dsm_project.data.example import ExampleWineAdapter
 
@@ -18,6 +19,7 @@ def load_project_dataset(config: ProjectConfig) -> ProjectDataset:
     adapters: dict[str, DatasetAdapter] = {
         "example_wine": ExampleWineAdapter(),
         "csv": CSVProjectAdapter(),
+        "ames_housing": AmesHousingAdapter(),
     }
     adapter_name = str(config.dataset["adapter"])
     try:

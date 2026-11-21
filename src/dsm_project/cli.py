@@ -11,6 +11,7 @@ import uvicorn
 from dsm_project.artifacts import save_bundle
 from dsm_project.config import load_config
 from dsm_project.data import load_project_dataset
+from dsm_project.evaluation import baseline_report
 from dsm_project.experiments import (
     fit_supervised_candidate,
     run_clustering_example,
@@ -54,7 +55,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--config", default="configs/example.toml")
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("verify", help="verify the complete reference path")
-    train = commands.add_parser("train-example", help="write an example model bundle")
+    commands.add_parser(
+        "baselines", help="cross-validate baselines on development rows only"
+    )
+    train =commands.add_parser("train-example", help="write an example model bundle")
     train.add_argument("--model", default="logistic_regression")
     train.add_argument("--output", default="artifacts/example-classifier")
     serve = commands.add_parser("serve", help="serve an approved model bundle")
@@ -71,6 +75,11 @@ def main() -> None:
     configure_logging()
     if arguments.command == "verify":
         print(json.dumps(verify(arguments.config), indent=2, sort_keys=True))
+        return
+    if arguments.command == "baselines":
+        config = load_config(arguments.config)
+        report = baseline_report(load_project_dataset(config), config)
+        print(report.dropna(axis=1, how="all").round(4).to_string(index=False))
         return
     if arguments.command == "train-example":
         config = load_config(arguments.config)

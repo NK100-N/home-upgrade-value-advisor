@@ -1,0 +1,35 @@
+[project]
+name = "Home Upgrade Value Advisor"
+intended_user = "A homeowner comparing renovation options for their own house"
+
+[dataset]
+adapter = "ames_housing"
+name = "Ames Housing"
+source = "De Cock (2011), Journal of Statistics Education 19(3); https://jse.amstat.org/v19n3/decock/AmesHousing.txt, retrieved 2026-11-16"
+license = "No explicit license stated; distributed by JSE for teaching. Raw file is not redistributed."
+path = "data/local/AmesHousing.txt"
+observation_unit = "one normal residential property sale in Ames, Iowa"
+identifier = "order"
+
+[tasks.regression]
+name = "estimate sale price in dollars"
+target = "sale_price"
+metric = "root_mean_squared_error"
+
+[tasks.classification]
+name = "predict a sale above the neighborhood's development median"
+target = "neighborhood_premium"
+positive_event = "sale price above the neighborhood median"
+metric = "balanced_accuracy"
+
+[tasks.unsupervised]
+name = "find stable home segments from price-free physical attributes"
+metric = "bootstrap_stability_and_silhouette"
+
+[split]
+random_state = 438
+# Holdout fraction for the template's single-split path, within development rows.
+test_fraction = 0.25
+time_column = "yr_sold"
+final_test_values = [2010]
+cv_folds = 5
