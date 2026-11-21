@@ -99,6 +99,39 @@ def summarize(folds: pd.DataFrame) -> dict[str, float]:
     return summary
 
 
+def model_fit_predict(
+    make_estimator: Callable[[], Any],
+    feature_columns: tuple[str, ...],
+    target_column: str,
+    *,
+    log_target: bool = False,
+    probability: bool = False,
+) -> FoldPredictor:
+    """Adapt any ``fit``/``predict`` estimator to :func:`cross_validate`.
+
+    A fresh estimator is built for every fold, so no fitted state crosses
+    folds. With ``log_target`` the model fits log(y) and predictions are
+    returned in dollars as exp(prediction). With ``probability`` the
+    estimator's ``predict_proba`` positive-class column is returned.
+    """
+
+    columns = list(feature_columns)
+
+    def fit_predict(train: pd.DataFrame, valid: pd.DataFrame) -> NDArray[Any]:
+        target = train[target_column].to_numpy(dtype=float)
+        estimator = make_estimator().fit(
+            train[columns].to_numpy(), np.log(target) if log_target else target
+        )
+        rows = valid[columns].to_numpy()
+        if probability:
+            output = np.asarray(estimator.predict_proba(rows))
+            return output[:, 1] if output.ndim == 2 else output
+        predicted = np.asarray(estimator.predict(rows), dtype=float)
+        return np.exp(predicted) if log_target else predicted
+
+    return fit_predict
+
+
 def _overall_median(train: pd.DataFrame, valid: pd.DataFrame) -> NDArray[np.float64]:
     return np.full(len(valid), float(train["sale_price"].median()))
 
