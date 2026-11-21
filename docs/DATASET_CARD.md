@@ -86,8 +86,10 @@ features, and their errors are reported separately.
   - `Pool QC` is missing for 2,917 homes without a pool.
   - Basement fields are missing for about 80 homes without a basement.
 
-  These are encoded as an explicit "none" level. Missing `Lot Frontage`
-  (490 rows) is truly unknown and is imputed inside the fitted pipeline.
+  On the quality scale these are encoded as 0 ("none") below Po = 1 through
+  Ex = 5. Missing basement bath counts and masonry veneer area also mean the
+  feature is absent and become 0. `Lot Frontage` is truly unknown for 490 rows
+  (449 after filtering) and is not used; `Lot Area` carries lot size.
 - **Leakage risks, excluded from features:**
   - `Sale Type`, `Sale Condition`, `Mo Sold`, and `Yr Sold` describe the sale,
     not the house. `Yr Sold` defines the split instead.
