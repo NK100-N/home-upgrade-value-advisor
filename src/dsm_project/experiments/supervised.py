@@ -26,6 +26,7 @@ from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 
 from dsm_project.config import ProjectConfig
 from dsm_project.contracts import ProjectDataset, TaskKind
+from dsm_project.data.splits import has_sealed_final_test, time_partition
 
 
 @dataclass(frozen=True)
@@ -143,8 +144,12 @@ def evaluate_supervised_estimator(
     if task.kind is TaskKind.UNSUPERVISED or task.target_column is None:
         raise ValueError("Use an unsupervised runner for this task")
 
-    features = dataset.observations.loc[:, task.feature_columns]
-    targets = dataset.observations.loc[:, task.target_column]
+    observations = dataset.observations
+    if has_sealed_final_test(config):
+        # Development-only holdout: the sealed final test is never touched here.
+        observations = time_partition(observations, config).development
+    features = observations.loc[:, task.feature_columns]
+    targets = observations.loc[:, task.target_column]
     seed = int(config.split.get("random_state", 438))
     stratify: Any = targets if task.kind is TaskKind.CLASSIFICATION else None
     train_x, test_x, train_y, test_y = train_test_split(

@@ -1,0 +1,35 @@
+# CI configuration: the Ames pipeline on the constructed fixture, not real data.
+[project]
+name = "Home Upgrade Value Advisor (CI fixture)"
+intended_user = "Continuous integration"
+
+[dataset]
+adapter = "ames_housing"
+name = "Ames Housing constructed fixture"
+source = "Invented by scripts/build_ames_fixture.py; schema mirrors AmesHousing.txt"
+license = "Constructed for this repository"
+path = "data/fixtures/ames_constructed.tsv"
+observation_unit = "one invented residential sale"
+identifier = "order"
+
+[tasks.regression]
+name = "estimate sale price in dollars"
+target = "sale_price"
+metric = "root_mean_squared_error"
+
+[tasks.classification]
+name = "predict a sale above the neighborhood's development median"
+target = "neighborhood_premium"
+positive_event = "sale price above the neighborhood median"
+metric = "balanced_accuracy"
+
+[tasks.unsupervised]
+name = "find stable home segments from price-free physical attributes"
+metric = "bootstrap_stability_and_silhouette"
+
+[split]
+random_state = 438
+test_fraction = 0.25
+time_column = "yr_sold"
+final_test_values = [2010]
+cv_folds = 5
